@@ -2,7 +2,7 @@ const dino = document.getElementById("dino");
 const cactus = document.getElementById("cactus")
 
 function jump() {
-  if (dino.classList == "jump"){
+  if (dino.classList == "jump") {
     return
   }
   dino.classList.add("jump");
@@ -11,16 +11,18 @@ function jump() {
   }, 300);
 }
 
-let isAlive = setInterval(function() {
-  let dinoTop = parseInt(window.getComputedStyle(dino).getPropertyValue("top"));
-  let cactusLeft = parseInt(
+function restart() {
+  let dinoTop, cactusLeft = 0;
+
+  dinoTop = parseInt(window.getComputedStyle(dino).getPropertyValue("top"));
+  cactusLeft = parseInt(
     window.getComputedStyle(cactus).getPropertyValue("left")
   );
-  if(cactusLeft < 50 && cactusLeft > 0 && dinoTop >= 140) {
+  if (cactusLeft < 50 && cactusLeft > 0 && dinoTop >= 140) {
     alert("Game Over!");
   }
-}, 10);
+}
 
-document.addEventListener("keydown", function (event) {
-  jump();
-});
+setInterval(restart, 10);
+
+document.addEventListener("keydown", jump);
